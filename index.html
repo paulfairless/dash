@@ -1,6 +1,5 @@
 <!doctype html>  
 
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ --> 
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
 <!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
@@ -8,58 +7,209 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-
-  <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame 
-       Remove this if you use the .htaccess -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title></title>
+  <title>Dash</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <!--  Mobile viewport optimized: j.mp/bplateviewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-
-  <!-- CSS : implied media="all" -->
   <link rel="stylesheet" href="css/style.css?v=2">
 
-  <!-- Uncomment if you are specifically targeting less enabled mobile browsers
-  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
- 
-  <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="js/libs/modernizr-1.6.min.js"></script>
+  	<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<style>
+@font-face {
+	/* This declaration targets everything else */
+	font-family: 'kimidorimugcupRegular';
+	src: url(//:) format('no404'), url('kimidori_mugcup-webfont.woff') format('woff'), url('kimidori_mugcup-webfont.ttf') format('truetype'), url('kimidori_mugcup-webfont.svg#webfontmQ8hmB0E') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+	.ui-widget {
+		width:430px;
+		margin:5px auto;
+	}
+	.ui-widget-header {
+		padding:2px;
+	}
+	.close, .settings{
+		float:right;
+	}
+	table {
+		display:none;
+	}
+	.column {
+		min-width:33%;
+		float:left;
+		min-height:500px;
+	}
+	li {
+		list-style:none;
+	}
+	header h1{
+
+			font-family: kimidorimugcupRegular, sans-serif; 
+			font-size:44px;
+		    color:#002277;
+		
+		float:left;
+	}
+	header {
+		background-color: #DDDDDD;
+		padding:10px 10px 0 10px;
+	}
+	body {
+		
+	}
+	#switcher {
+		float:right;
+	}
+	</style>
 
 </head>
 
 <body>
 
   <div id="container">
-    <header>
-
+    <header class='ui-helper-clearfix'>
+		<h1>Dash</h1>
+		<div id="switcher"></div>
     </header>
     
-    <div id="main">
-
+    <div id="main" class="column">
+		
+		<div class="ui-widget">
+		 <div class="ui-widget-header ui-corner-top">Browsers
+		 <a href="#" class="ui-icon ui-icon-closethick close">x</a></div>
+		 <div class="ui-widget-content ui-corner-bottom">
+		  	<table>
+				<caption>Browser Stats</caption>
+				<thead>
+					<tr>
+						<td></td>
+						<th scope="col">food</th>
+						<th scope="col">auto</th>
+						<th scope="col">household</th>
+						<th scope="col">furniture</th>
+						<th scope="col">kitchen</th>
+						<th scope="col">bath</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th scope="row">Mary</th>
+						<td>190</td>
+						<td>160</td>
+						<td>40</td>
+						<td>120</td>
+						<td>30</td>
+						<td>70</td>
+					</tr>
+					<tr>
+						<th scope="row">Tom</th>
+						<td>3</td>
+						<td>40</td>
+						<td>30</td>
+						<td>45</td>
+						<td>35</td>
+						<td>49</td>
+					</tr>
+				</tbody>
+			</table>
+		 </div>
+		</div>
+		
+				
     </div>
-    
+<div id="main2" class="column"></div>
+<divid="main3" class="column"></div>
     <footer>
 
     </footer>
-  </div> <!--! end of #container -->
+  </div> <!-- end of #container -->
 
 
-  <!-- Javascript at the bottom for fast page loading -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script src="https://github.com/jquery/jquery-tmpl/raw/master/jquery.tmpl.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+<script src="http://jqueryui.com/themeroller/themeswitchertool/"></script>
+<script src="js/mylibs/visualize.jQuery.js"></script>
+<script src="js/mylibs/jquery.tweet.js"></script>
+<script id="widgetTemplate" type="text/x-jquery-tmpl"> 
+	<div class="ui-widget" id="${id}">
+		<div class="ui-widget-header ui-corner-top">
+		    ${heading}
+			<a href="#" class="ui-icon ui-icon-closethick close">x</a>
+			<a href="#" class="ui-icon ui-icon-wrench settings">x</a>
+		</div>
+		
+	 	<div class="ui-widget-content ui-corner-bottom">
+		<div class="sets">
+		    
+		</div></div>
+	</div>
+</script>  
+<script>
+var DashWidget = {
+	
+	_init: function() {
+		$( "#widgetTemplate" ).tmpl( this.options ).appendTo( this.element );
+		var that = this;
+		$(".settings", "#"+this.options.id).click(function(){that.editSettings(that.options.id)})
+	},
+	
+	editSettings: function(id){
+		var settings = "<div class='ui-corner-bottom'><form><input type='text' name='heading' /><input type=\"submit\" value=\"Save\"></form></div>";
+		$(".ui-widget").addClass("ui-state-disabled")
+		
+		$(".ui-widget-content", "#"+id).children().hide().fadeOut();
+		$(".ui-widget-content .sets", "#"+id).append(settings).fadeIn();
+		$("#"+id).addClass("ui-state-highlight").removeClass("ui-state-disabled")
+	},
+	
+	options: {
+		heading:'Default Widget',
+		interval:60*60,
+		id:'0'
+	}
+}
+$.widget('ui.dash',DashWidget);
 
-  <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.4.2.js"%3E%3C/script%3E'))</script>
-  
-  
+var Twitter = $.extend({}, $.ui.dash.prototype, {
+
+	getQuery: function() {return this.options.query;},
+	setQuery: function(x) {this.options.query=x;},
+	_init: function(){
+		$.ui.dash.prototype._init.call(this);
+		$(".ui-widget-content", "#"+this.options.id).tweet({query: this.getQuery(), join_text: "auto",
+		            avatar_size: 32,
+		            count: 3,
+		            loading_text: "loading tweets..."});
+	},
+	options: {
+		heading:'Twitter',
+		query:'sky',
+		id: 'twitter'
+	}
+});
+$.widget('ui.twitter',Twitter);
+
+$(document).ready(function(){
+	$(".column").sortable({ connectWith: '.column' });
+	$('#switcher').themeswitcher();
+	$('table').visualize({type: 'pie', height: '300px', width: '420px'});
+	
+	
+	$('#main').twitter({
+		query:'RickyHatton'
+	});
+})
+</script>
+
   <!-- scripts concatenated and minified via ant build script-->
   <script src="js/plugins.js"></script>
   <script src="js/script.js"></script>
@@ -68,27 +218,9 @@
   
   <!--[if lt IE 7 ]>
     <script src="js/libs/dd_belatedpng.js"></script>
-    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); </script>
   <![endif]-->
 
-  <!-- yui profiler and profileviewer - remove for production -->
-  <script src="js/profiling/yahoo-profiling.min.js"></script>
-  <script src="js/profiling/config.js"></script>
-  <!-- end profiling code -->
-
-
-  <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
-       change the UA-XXXXX-X to be your site's ID -->
-  <script>
-   var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
-   (function(d, t) {
-    var g = d.createElement(t),
-        s = d.getElementsByTagName(t)[0];
-    g.async = true;
-    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g, s);
-   })(document, 'script');
-  </script>
   
 </body>
 </html>
