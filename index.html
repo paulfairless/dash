@@ -62,6 +62,13 @@
 		background-color: #DDDDDD;
 		padding:10px 10px 0 10px;
 	}
+	header #time {
+		font-family: kimidorimugcupRegular, sans-serif; 
+		font-size:12px;
+	    color:#002277;
+	
+	float:left;
+	}
 	body {
 		
 	}
@@ -77,6 +84,7 @@
   <div id="container">
     <header class='ui-helper-clearfix'>
 		<h1>Dash</h1>
+		<div id="time"></div>
 		<div id="switcher"></div>
     </header>
     
@@ -133,12 +141,21 @@
   </div> <!-- end of #container -->
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-<script src="https://github.com/jquery/jquery-tmpl/raw/master/jquery.tmpl.js"></script>
+<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.5.min.js"></script>
+<script src="https://github.com/jquery/jquery-tmpl/raw/master/jquery.tmpl.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
 <script src="http://jqueryui.com/themeroller/themeswitchertool/"></script>
 <script src="js/mylibs/visualize.jQuery.js"></script>
 <script src="js/mylibs/jquery.tweet.js"></script>
+<script>
+	function renderTime() {
+		
+		var currentTime = new Date();
+		$("#time").text(currentTime.toGMTString());
+		setTimeout('renderTime()', 1000);
+	}
+	renderTime();
+</script>
 <script id="widgetTemplate" type="text/x-jquery-tmpl"> 
 	<div class="ui-widget" id="${id}">
 		<div class="ui-widget-header ui-corner-top">
@@ -198,6 +215,30 @@ var Twitter = $.extend({}, $.ui.dash.prototype, {
 });
 $.widget('ui.twitter',Twitter);
 
+var DataVisualise = $.extend({}, $.ui.dash.prototype, {
+
+	_init: function(){
+		$.ui.dash.prototype._init.call(this);
+		var table = $("<table>");
+		table.append("<tr><th scope=\"row\">ie</th><td>30</td></tr>");
+		table.append("<tr><th scope=\"row\">Firefox</th><td>70</td></tr>");
+		$(".ui-widget-content", "#"+this.options.id).append(table);
+		
+		table.visualize({
+			type: this.options.type,
+			height: '300px', 
+			width: '420px'
+		});
+	},
+	options: {
+		heading:'Browsers',
+		dataSet:'',
+		chartType:'pie',
+		id: 'browsers'
+	}
+});
+$.widget('ui.dataVisualise',DataVisualise);
+
 $(document).ready(function(){
 	$(".column").sortable({ connectWith: '.column' });
 	$('#switcher').themeswitcher();
@@ -206,6 +247,10 @@ $(document).ready(function(){
 	
 	$('#main').twitter({
 		query:'RickyHatton'
+	});
+	
+	$('#main').dataVisualise({
+		chartType:'pie'
 	});
 })
 </script>
