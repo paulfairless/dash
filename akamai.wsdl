@@ -1,0 +1,2976 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" xmlns:akaaimsdt="https://control.akamai.com/Data.xsd" xmlns:akaawsdt="https://control.akamai.com/AWS.xsd" xmlns:akasiteDeldt="https://control.akamai.com/HttpContentDeliveryReportService.xsd" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!--WSDL created by Apache Axis version: 1.3
+Built on Jan 26, 2006 (05:12:02 PST)-->
+
+  <wsdl:types>
+    <schema targetNamespace="https://control.akamai.com/Data.xsd" xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="https://control.akamai.com/AWS.xsd"/>
+      <import namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd"/>
+      <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <complexType name="CPCodeInfo">
+        <sequence>
+          <element name="cpcode" type="xsd:int"/>
+          <element name="description" nillable="true" type="xsd:string"/>
+          <element name="service" nillable="true" type="xsd:string"/>
+        </sequence>
+      </complexType>
+      <simpleType name="UrlReportFilterOperatorEnum">
+        <restriction base="xsd:string">
+          <enumeration value="contains"/>
+          <enumeration value="starts_with"/>
+          <enumeration value="ends_with"/>
+          <enumeration value="not_contains"/>
+          <enumeration value="not_starts_with"/>
+          <enumeration value="not_ends_with"/>
+          <enumeration value="match_regular_expression"/>
+          <enumeration value="not_match_regular_expression"/>
+          <enumeration value="exact_match"/>
+        </restriction>
+      </simpleType>
+      <complexType name="UrlReportFilter">
+        <sequence>
+          <element name="caseSensitive" type="xsd:boolean"/>
+          <element name="operand" nillable="true" type="xsd:string"/>
+          <element name="operator" nillable="true" type="akaaimsdt:UrlReportFilterOperatorEnum"/>
+        </sequence>
+      </complexType>
+    </schema>
+    <schema targetNamespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="https://control.akamai.com/AWS.xsd"/>
+      <import namespace="https://control.akamai.com/Data.xsd"/>
+      <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <complexType name="ArrayOfCPCodeInfo">
+        <complexContent>
+          <restriction base="soapenc:Array">
+            <attribute ref="soapenc:arrayType" wsdl:arrayType="akaaimsdt:CPCodeInfo[]"/>
+          </restriction>
+        </complexContent>
+      </complexType>
+      <complexType name="ArrayOfString">
+        <complexContent>
+          <restriction base="soapenc:Array">
+            <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:string[]"/>
+          </restriction>
+        </complexContent>
+      </complexType>
+      <complexType name="ArrayOfInt">
+        <complexContent>
+          <restriction base="soapenc:Array">
+            <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:int[]"/>
+          </restriction>
+        </complexContent>
+      </complexType>
+    </schema>
+    <schema targetNamespace="https://control.akamai.com/AWS.xsd" xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd"/>
+      <import namespace="https://control.akamai.com/Data.xsd"/>
+      <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+      <complexType name="AWSFault">
+        <sequence/>
+      </complexType>
+    </schema>
+  </wsdl:types>
+    <wsdl:message name="getURLForReportGroupRequest">
+        <wsdl:part name="repgrp" type="xsd:string"/>
+        <wsdl:part name="startDate" type="xsd:string"/>
+        <wsdl:part name="endDate" type="xsd:string"/>
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+        <wsdl:part name="sortColumn" type="xsd:string"/>
+        <wsdl:part name="filter" type="akaaimsdt:UrlReportFilter"/>
+    </wsdl:message>
+    <wsdl:message name="getTrafficSummaryForReportGroupV2Response">
+        <wsdl:part name="getTrafficSummaryForReportGroupV2Return" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="getUserLocationByCAProvinceForReportGroupResponse">
+        <wsdl:part name="getUserLocationByCAProvinceForReportGroupReturn" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="getVisitorBySoftwareForCPCodeRequest">
+        <wsdl:part name="cpcode" type="xsd:int"/>
+        <wsdl:part name="date" type="xsd:string"/>
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+    </wsdl:message>
+    <wsdl:message name="getVisitorByOSForReportGroupRequest">
+        <wsdl:part name="repgrp" type="xsd:string"/>
+        <wsdl:part name="date" type="xsd:string"/>
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+    </wsdl:message>
+    <wsdl:message name="getTrafficSummaryGranularityForReportGroupRequest">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="start" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="end" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="gran" type="xsd:string"/>
+
+
+        <wsdl:part name="timeZone" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorBySoftwareForReportGroupRequest">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUniqueVisitorForCPCodeRequest">
+
+
+        <wsdl:part name="cpcode" type="xsd:int"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorBySoftwareForReportGroupResponse">
+
+
+        <wsdl:part name="getVisitorBySoftwareForReportGroupReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryForReportGroupV2Request">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="start" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="end" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="timeZone" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByCountryForCPCodeV2Response">
+
+
+        <wsdl:part name="getVisitorByCountryForCPCodeV2Return" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTopVisitorForCPCodeResponse">
+
+
+        <wsdl:part name="getTopVisitorForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getURLDailyAggregationForReportGroupRequest">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="startDate" type="xsd:string"/>
+
+
+        <wsdl:part name="endDate" type="xsd:string"/>
+
+
+        <wsdl:part name="aggregateColumn" type="xsd:string"/>
+
+
+        <wsdl:part name="filter" type="akaaimsdt:UrlReportFilter"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByUSStateForReportGroupV2Request">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserLocationByUSStateForReportGroupRequest">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="startDate" type="xsd:string"/>
+
+
+        <wsdl:part name="endDate" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserLocationByCountryForReportGroupRequest">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="startDate" type="xsd:string"/>
+
+
+        <wsdl:part name="endDate" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserLocationByCAProvinceForReportGroupRequest">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="startDate" type="xsd:string"/>
+
+
+        <wsdl:part name="endDate" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTopVisitorForCPCodeRequest">
+
+
+        <wsdl:part name="cpcode" type="xsd:int"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTopVisitorForReportGroupResponse">
+
+
+        <wsdl:part name="getTopVisitorForReportGroupReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryForCPCodeRequest">
+
+
+        <wsdl:part name="cpcodes" type="akasiteDeldt:ArrayOfInt"/>
+
+
+        <wsdl:part name="start" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="end" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="timeZone" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getNumURLForReportGroupResponse">
+
+
+        <wsdl:part name="getNumURLForReportGroupReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserLocationByCountryForCPCodeResponse">
+
+
+        <wsdl:part name="getUserLocationByCountryForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getCPCodesResponse">
+
+
+        <wsdl:part name="getCPCodesReturn" type="akasiteDeldt:ArrayOfCPCodeInfo"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryForReportGroupV3Request">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="start" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="end" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="timeZone" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByCAProvinceForReportGroupV2Request">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorBySoftwareForCPCodeResponse">
+
+
+        <wsdl:part name="getVisitorBySoftwareForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByCountryForReportGroupV2Request">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getNumURLForCPCodeResponse">
+
+
+        <wsdl:part name="getNumURLForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryGranularityForCPCodeV2Response">
+
+
+        <wsdl:part name="getTrafficSummaryGranularityForCPCodeV2Return" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getURLForCPCodeRequest">
+
+
+        <wsdl:part name="cpcodes" type="akasiteDeldt:ArrayOfInt"/>
+
+
+        <wsdl:part name="startDate" type="xsd:string"/>
+
+
+        <wsdl:part name="endDate" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+        <wsdl:part name="sortColumn" type="xsd:string"/>
+
+
+        <wsdl:part name="filter" type="akaaimsdt:UrlReportFilter"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByCAProvinceForCPCodeV2Response">
+
+
+        <wsdl:part name="getVisitorByCAProvinceForCPCodeV2Return" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryForReportGroupResponse">
+
+
+        <wsdl:part name="getTrafficSummaryForReportGroupReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getURLForReportGroupResponse">
+
+
+        <wsdl:part name="getURLForReportGroupReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByOSForCPCodeResponse">
+
+
+        <wsdl:part name="getVisitorByOSForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryGranularityForReportGroupV2Response">
+
+
+        <wsdl:part name="getTrafficSummaryGranularityForReportGroupV2Return" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserLocationByCountryForCPCodeRequest">
+
+
+        <wsdl:part name="cpcodes" type="akasiteDeldt:ArrayOfInt"/>
+
+
+        <wsdl:part name="startDate" type="xsd:string"/>
+
+
+        <wsdl:part name="endDate" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryForCPCodeV3Response">
+
+
+        <wsdl:part name="getTrafficSummaryForCPCodeV3Return" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryGranularityForReportGroupV2Request">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="start" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="end" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="gran" type="xsd:string"/>
+
+
+        <wsdl:part name="timeZone" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUniqueVisitorForCPCodeResponse">
+
+
+        <wsdl:part name="getUniqueVisitorForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getURLDailyAggregationForReportGroupResponse">
+
+
+        <wsdl:part name="getURLDailyAggregationForReportGroupReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserLocationByUSStateForReportGroupResponse">
+
+
+        <wsdl:part name="getUserLocationByUSStateForReportGroupReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryGranularityForCPCodeRequest">
+
+
+        <wsdl:part name="cpcodes" type="akasiteDeldt:ArrayOfInt"/>
+
+
+        <wsdl:part name="start" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="end" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="gran" type="xsd:string"/>
+
+
+        <wsdl:part name="timeZone" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryGranularityForReportGroupResponse">
+
+
+        <wsdl:part name="getTrafficSummaryGranularityForReportGroupReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserLocationByCAProvinceForCPCodeResponse">
+
+
+        <wsdl:part name="getUserLocationByCAProvinceForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getNumURLForReportGroupRequest">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="startDate" type="xsd:string"/>
+
+
+        <wsdl:part name="endDate" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+        <wsdl:part name="sortColumn" type="xsd:string"/>
+
+
+        <wsdl:part name="filter" type="akaaimsdt:UrlReportFilter"/>
+
+
+        <wsdl:part name="numRows" type="xsd:int"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByCAProvinceForReportGroupV2Response">
+
+
+        <wsdl:part name="getVisitorByCAProvinceForReportGroupV2Return" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserLocationByCAProvinceForCPCodeRequest">
+
+
+        <wsdl:part name="cpcodes" type="akasiteDeldt:ArrayOfInt"/>
+
+
+        <wsdl:part name="startDate" type="xsd:string"/>
+
+
+        <wsdl:part name="endDate" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getURLDailyAggregationForCPCodeResponse">
+
+
+        <wsdl:part name="getURLDailyAggregationForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByOSForCPCodeRequest">
+
+
+        <wsdl:part name="cpcode" type="xsd:int"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getNumURLForCPCodeRequest">
+
+
+        <wsdl:part name="cpcodes" type="akasiteDeldt:ArrayOfInt"/>
+
+
+        <wsdl:part name="startDate" type="xsd:string"/>
+
+
+        <wsdl:part name="endDate" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+        <wsdl:part name="sortColumn" type="xsd:string"/>
+
+
+        <wsdl:part name="filter" type="akaaimsdt:UrlReportFilter"/>
+
+
+        <wsdl:part name="numRows" type="xsd:int"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByCountryForReportGroupV2Response">
+
+
+        <wsdl:part name="getVisitorByCountryForReportGroupV2Return" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryGranularityForCPCodeResponse">
+
+
+        <wsdl:part name="getTrafficSummaryGranularityForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getURLForCPCodeResponse">
+
+
+        <wsdl:part name="getURLForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByUSStateForCPCodeV2Request">
+
+
+        <wsdl:part name="cpcode" type="xsd:int"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getCPCodesRequest">
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryForReportGroupV3Response">
+
+
+        <wsdl:part name="getTrafficSummaryForReportGroupV3Return" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="AWSFault">
+
+
+        <wsdl:part name="fault" type="akaawsdt:AWSFault"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByCountryForCPCodeV2Request">
+
+
+        <wsdl:part name="cpcode" type="xsd:int"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryForCPCodeV2Request">
+
+
+        <wsdl:part name="cpcodes" type="akasiteDeldt:ArrayOfInt"/>
+
+
+        <wsdl:part name="start" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="end" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="timeZone" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByUSStateForReportGroupV2Response">
+
+
+        <wsdl:part name="getVisitorByUSStateForReportGroupV2Return" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByOSForReportGroupResponse">
+
+
+        <wsdl:part name="getVisitorByOSForReportGroupReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryGranularityForCPCodeV2Request">
+
+
+        <wsdl:part name="cpcodes" type="akasiteDeldt:ArrayOfInt"/>
+
+
+        <wsdl:part name="start" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="end" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="gran" type="xsd:string"/>
+
+
+        <wsdl:part name="timeZone" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByUSStateForCPCodeV2Response">
+
+
+        <wsdl:part name="getVisitorByUSStateForCPCodeV2Return" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryForReportGroupRequest">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="start" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="end" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="timeZone" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryForCPCodeResponse">
+
+
+        <wsdl:part name="getTrafficSummaryForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryForCPCodeV3Request">
+
+
+        <wsdl:part name="cpcodes" type="akasiteDeldt:ArrayOfInt"/>
+
+
+        <wsdl:part name="start" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="end" type="xsd:dateTime"/>
+
+
+        <wsdl:part name="timeZone" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserLocationByCountryForReportGroupResponse">
+
+
+        <wsdl:part name="getUserLocationByCountryForReportGroupReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTrafficSummaryForCPCodeV2Response">
+
+
+        <wsdl:part name="getTrafficSummaryForCPCodeV2Return" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getURLDailyAggregationForCPCodeRequest">
+
+
+        <wsdl:part name="cpcodes" type="akasiteDeldt:ArrayOfInt"/>
+
+
+        <wsdl:part name="startDate" type="xsd:string"/>
+
+
+        <wsdl:part name="endDate" type="xsd:string"/>
+
+
+        <wsdl:part name="aggregateColumn" type="xsd:string"/>
+
+
+        <wsdl:part name="filter" type="akaaimsdt:UrlReportFilter"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUniqueVisitorForReportGroupResponse">
+
+
+        <wsdl:part name="getUniqueVisitorForReportGroupReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUniqueVisitorForReportGroupRequest">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserLocationByUSStateForCPCodeRequest">
+
+
+        <wsdl:part name="cpcodes" type="akasiteDeldt:ArrayOfInt"/>
+
+
+        <wsdl:part name="startDate" type="xsd:string"/>
+
+
+        <wsdl:part name="endDate" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getVisitorByCAProvinceForCPCodeV2Request">
+
+
+        <wsdl:part name="cpcode" type="xsd:int"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getTopVisitorForReportGroupRequest">
+
+
+        <wsdl:part name="repgrp" type="xsd:string"/>
+
+
+        <wsdl:part name="date" type="xsd:string"/>
+
+
+        <wsdl:part name="columns" type="akasiteDeldt:ArrayOfString"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:message name="getUserLocationByUSStateForCPCodeResponse">
+
+
+        <wsdl:part name="getUserLocationByUSStateForCPCodeReturn" type="xsd:string"/>
+
+
+    </wsdl:message>
+
+
+    <wsdl:portType name="HttpContentDeliveryReportService">
+
+
+        <wsdl:operation name="getCPCodes">
+
+
+            <wsdl:input message="akasiteDeldt:getCPCodesRequest" name="getCPCodesRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getCPCodesResponse" name="getCPCodesResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUniqueVisitorForCPCode" parameterOrder="cpcode date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getUniqueVisitorForCPCodeRequest" name="getUniqueVisitorForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getUniqueVisitorForCPCodeResponse" name="getUniqueVisitorForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUniqueVisitorForReportGroup" parameterOrder="repgrp date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getUniqueVisitorForReportGroupRequest" name="getUniqueVisitorForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getUniqueVisitorForReportGroupResponse" name="getUniqueVisitorForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTopVisitorForCPCode" parameterOrder="cpcode date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTopVisitorForCPCodeRequest" name="getTopVisitorForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTopVisitorForCPCodeResponse" name="getTopVisitorForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForCPCode" parameterOrder="cpcodes start end timeZone columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTrafficSummaryForCPCodeRequest" name="getTrafficSummaryForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTrafficSummaryForCPCodeResponse" name="getTrafficSummaryForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForCPCodeV2" parameterOrder="cpcodes start end timeZone columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTrafficSummaryForCPCodeV2Request" name="getTrafficSummaryForCPCodeV2Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTrafficSummaryForCPCodeV2Response" name="getTrafficSummaryForCPCodeV2Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForCPCodeV3" parameterOrder="cpcodes start end timeZone columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTrafficSummaryForCPCodeV3Request" name="getTrafficSummaryForCPCodeV3Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTrafficSummaryForCPCodeV3Response" name="getTrafficSummaryForCPCodeV3Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryGranularityForCPCode" parameterOrder="cpcodes start end gran timeZone columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTrafficSummaryGranularityForCPCodeRequest" name="getTrafficSummaryGranularityForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTrafficSummaryGranularityForCPCodeResponse" name="getTrafficSummaryGranularityForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryGranularityForCPCodeV2" parameterOrder="cpcodes start end gran timeZone columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTrafficSummaryGranularityForCPCodeV2Request" name="getTrafficSummaryGranularityForCPCodeV2Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTrafficSummaryGranularityForCPCodeV2Response" name="getTrafficSummaryGranularityForCPCodeV2Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForReportGroup" parameterOrder="repgrp start end timeZone columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTrafficSummaryForReportGroupRequest" name="getTrafficSummaryForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTrafficSummaryForReportGroupResponse" name="getTrafficSummaryForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForReportGroupV2" parameterOrder="repgrp start end timeZone columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTrafficSummaryForReportGroupV2Request" name="getTrafficSummaryForReportGroupV2Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTrafficSummaryForReportGroupV2Response" name="getTrafficSummaryForReportGroupV2Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForReportGroupV3" parameterOrder="repgrp start end timeZone columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTrafficSummaryForReportGroupV3Request" name="getTrafficSummaryForReportGroupV3Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTrafficSummaryForReportGroupV3Response" name="getTrafficSummaryForReportGroupV3Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryGranularityForReportGroup" parameterOrder="repgrp start end gran timeZone columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTrafficSummaryGranularityForReportGroupRequest" name="getTrafficSummaryGranularityForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTrafficSummaryGranularityForReportGroupResponse" name="getTrafficSummaryGranularityForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryGranularityForReportGroupV2" parameterOrder="repgrp start end gran timeZone columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTrafficSummaryGranularityForReportGroupV2Request" name="getTrafficSummaryGranularityForReportGroupV2Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTrafficSummaryGranularityForReportGroupV2Response" name="getTrafficSummaryGranularityForReportGroupV2Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByOSForCPCode" parameterOrder="cpcode date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getVisitorByOSForCPCodeRequest" name="getVisitorByOSForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getVisitorByOSForCPCodeResponse" name="getVisitorByOSForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByOSForReportGroup" parameterOrder="repgrp date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getVisitorByOSForReportGroupRequest" name="getVisitorByOSForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getVisitorByOSForReportGroupResponse" name="getVisitorByOSForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorBySoftwareForCPCode" parameterOrder="cpcode date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getVisitorBySoftwareForCPCodeRequest" name="getVisitorBySoftwareForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getVisitorBySoftwareForCPCodeResponse" name="getVisitorBySoftwareForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorBySoftwareForReportGroup" parameterOrder="repgrp date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getVisitorBySoftwareForReportGroupRequest" name="getVisitorBySoftwareForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getVisitorBySoftwareForReportGroupResponse" name="getVisitorBySoftwareForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByCountryForCPCodeV2" parameterOrder="cpcode date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getVisitorByCountryForCPCodeV2Request" name="getVisitorByCountryForCPCodeV2Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getVisitorByCountryForCPCodeV2Response" name="getVisitorByCountryForCPCodeV2Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByCountryForReportGroupV2" parameterOrder="repgrp date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getVisitorByCountryForReportGroupV2Request" name="getVisitorByCountryForReportGroupV2Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getVisitorByCountryForReportGroupV2Response" name="getVisitorByCountryForReportGroupV2Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByUSStateForCPCodeV2" parameterOrder="cpcode date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getVisitorByUSStateForCPCodeV2Request" name="getVisitorByUSStateForCPCodeV2Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getVisitorByUSStateForCPCodeV2Response" name="getVisitorByUSStateForCPCodeV2Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByUSStateForReportGroupV2" parameterOrder="repgrp date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getVisitorByUSStateForReportGroupV2Request" name="getVisitorByUSStateForReportGroupV2Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getVisitorByUSStateForReportGroupV2Response" name="getVisitorByUSStateForReportGroupV2Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByCAProvinceForCPCodeV2" parameterOrder="cpcode date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getVisitorByCAProvinceForCPCodeV2Request" name="getVisitorByCAProvinceForCPCodeV2Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getVisitorByCAProvinceForCPCodeV2Response" name="getVisitorByCAProvinceForCPCodeV2Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByCAProvinceForReportGroupV2" parameterOrder="repgrp date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getVisitorByCAProvinceForReportGroupV2Request" name="getVisitorByCAProvinceForReportGroupV2Request"/>
+
+
+            <wsdl:output message="akasiteDeldt:getVisitorByCAProvinceForReportGroupV2Response" name="getVisitorByCAProvinceForReportGroupV2Response"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getNumURLForCPCode" parameterOrder="cpcodes startDate endDate columns sortColumn filter numRows">
+
+
+            <wsdl:input message="akasiteDeldt:getNumURLForCPCodeRequest" name="getNumURLForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getNumURLForCPCodeResponse" name="getNumURLForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getNumURLForReportGroup" parameterOrder="repgrp startDate endDate columns sortColumn filter numRows">
+
+
+            <wsdl:input message="akasiteDeldt:getNumURLForReportGroupRequest" name="getNumURLForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getNumURLForReportGroupResponse" name="getNumURLForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTopVisitorForReportGroup" parameterOrder="repgrp date columns">
+
+
+            <wsdl:input message="akasiteDeldt:getTopVisitorForReportGroupRequest" name="getTopVisitorForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getTopVisitorForReportGroupResponse" name="getTopVisitorForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByCountryForCPCode" parameterOrder="cpcodes startDate endDate columns">
+
+
+            <wsdl:input message="akasiteDeldt:getUserLocationByCountryForCPCodeRequest" name="getUserLocationByCountryForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getUserLocationByCountryForCPCodeResponse" name="getUserLocationByCountryForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByCountryForReportGroup" parameterOrder="repgrp startDate endDate columns">
+
+
+            <wsdl:input message="akasiteDeldt:getUserLocationByCountryForReportGroupRequest" name="getUserLocationByCountryForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getUserLocationByCountryForReportGroupResponse" name="getUserLocationByCountryForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByUSStateForCPCode" parameterOrder="cpcodes startDate endDate columns">
+
+
+            <wsdl:input message="akasiteDeldt:getUserLocationByUSStateForCPCodeRequest" name="getUserLocationByUSStateForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getUserLocationByUSStateForCPCodeResponse" name="getUserLocationByUSStateForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByUSStateForReportGroup" parameterOrder="repgrp startDate endDate columns">
+
+
+            <wsdl:input message="akasiteDeldt:getUserLocationByUSStateForReportGroupRequest" name="getUserLocationByUSStateForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getUserLocationByUSStateForReportGroupResponse" name="getUserLocationByUSStateForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByCAProvinceForCPCode" parameterOrder="cpcodes startDate endDate columns">
+
+
+            <wsdl:input message="akasiteDeldt:getUserLocationByCAProvinceForCPCodeRequest" name="getUserLocationByCAProvinceForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getUserLocationByCAProvinceForCPCodeResponse" name="getUserLocationByCAProvinceForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByCAProvinceForReportGroup" parameterOrder="repgrp startDate endDate columns">
+
+
+            <wsdl:input message="akasiteDeldt:getUserLocationByCAProvinceForReportGroupRequest" name="getUserLocationByCAProvinceForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getUserLocationByCAProvinceForReportGroupResponse" name="getUserLocationByCAProvinceForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getURLForReportGroup" parameterOrder="repgrp startDate endDate columns sortColumn filter">
+
+
+            <wsdl:input message="akasiteDeldt:getURLForReportGroupRequest" name="getURLForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getURLForReportGroupResponse" name="getURLForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getURLForCPCode" parameterOrder="cpcodes startDate endDate columns sortColumn filter">
+
+
+            <wsdl:input message="akasiteDeldt:getURLForCPCodeRequest" name="getURLForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getURLForCPCodeResponse" name="getURLForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getURLDailyAggregationForCPCode" parameterOrder="cpcodes startDate endDate aggregateColumn filter">
+
+
+            <wsdl:input message="akasiteDeldt:getURLDailyAggregationForCPCodeRequest" name="getURLDailyAggregationForCPCodeRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getURLDailyAggregationForCPCodeResponse" name="getURLDailyAggregationForCPCodeResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getURLDailyAggregationForReportGroup" parameterOrder="repgrp startDate endDate aggregateColumn filter">
+
+
+            <wsdl:input message="akasiteDeldt:getURLDailyAggregationForReportGroupRequest" name="getURLDailyAggregationForReportGroupRequest"/>
+
+
+            <wsdl:output message="akasiteDeldt:getURLDailyAggregationForReportGroupResponse" name="getURLDailyAggregationForReportGroupResponse"/>
+
+
+            <wsdl:fault message="akasiteDeldt:AWSFault" name="AWSFault"/>
+
+
+        </wsdl:operation>
+
+
+    </wsdl:portType>
+
+
+    <wsdl:binding name="HttpContentDeliveryReportService" type="akasiteDeldt:HttpContentDeliveryReportService">
+
+
+        <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+
+        <wsdl:operation name="getCPCodes">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getCPCodesRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getCPCodesResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUniqueVisitorForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getUniqueVisitorForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getUniqueVisitorForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUniqueVisitorForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getUniqueVisitorForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getUniqueVisitorForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTopVisitorForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTopVisitorForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTopVisitorForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTrafficSummaryForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTrafficSummaryForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForCPCodeV2">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTrafficSummaryForCPCodeV2Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTrafficSummaryForCPCodeV2Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForCPCodeV3">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTrafficSummaryForCPCodeV3Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTrafficSummaryForCPCodeV3Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryGranularityForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTrafficSummaryGranularityForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTrafficSummaryGranularityForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryGranularityForCPCodeV2">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTrafficSummaryGranularityForCPCodeV2Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTrafficSummaryGranularityForCPCodeV2Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTrafficSummaryForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTrafficSummaryForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForReportGroupV2">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTrafficSummaryForReportGroupV2Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTrafficSummaryForReportGroupV2Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryForReportGroupV3">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTrafficSummaryForReportGroupV3Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTrafficSummaryForReportGroupV3Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryGranularityForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTrafficSummaryGranularityForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTrafficSummaryGranularityForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTrafficSummaryGranularityForReportGroupV2">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTrafficSummaryGranularityForReportGroupV2Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTrafficSummaryGranularityForReportGroupV2Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByOSForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getVisitorByOSForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getVisitorByOSForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByOSForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getVisitorByOSForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getVisitorByOSForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorBySoftwareForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getVisitorBySoftwareForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getVisitorBySoftwareForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorBySoftwareForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getVisitorBySoftwareForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getVisitorBySoftwareForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByCountryForCPCodeV2">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getVisitorByCountryForCPCodeV2Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getVisitorByCountryForCPCodeV2Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByCountryForReportGroupV2">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getVisitorByCountryForReportGroupV2Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getVisitorByCountryForReportGroupV2Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByUSStateForCPCodeV2">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getVisitorByUSStateForCPCodeV2Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getVisitorByUSStateForCPCodeV2Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByUSStateForReportGroupV2">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getVisitorByUSStateForReportGroupV2Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getVisitorByUSStateForReportGroupV2Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByCAProvinceForCPCodeV2">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getVisitorByCAProvinceForCPCodeV2Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getVisitorByCAProvinceForCPCodeV2Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getVisitorByCAProvinceForReportGroupV2">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getVisitorByCAProvinceForReportGroupV2Request">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getVisitorByCAProvinceForReportGroupV2Response">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getNumURLForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getNumURLForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getNumURLForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getNumURLForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getNumURLForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getNumURLForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getTopVisitorForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getTopVisitorForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getTopVisitorForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByCountryForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getUserLocationByCountryForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getUserLocationByCountryForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByCountryForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getUserLocationByCountryForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getUserLocationByCountryForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByUSStateForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getUserLocationByUSStateForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getUserLocationByUSStateForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByUSStateForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getUserLocationByUSStateForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getUserLocationByUSStateForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByCAProvinceForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getUserLocationByCAProvinceForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getUserLocationByCAProvinceForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getUserLocationByCAProvinceForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getUserLocationByCAProvinceForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getUserLocationByCAProvinceForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getURLForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getURLForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getURLForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getURLForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getURLForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getURLForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getURLDailyAggregationForCPCode">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getURLDailyAggregationForCPCodeRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getURLDailyAggregationForCPCodeResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+        <wsdl:operation name="getURLDailyAggregationForReportGroup">
+
+
+            <wsdlsoap:operation soapAction=""/>
+
+
+            <wsdl:input name="getURLDailyAggregationForReportGroupRequest">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:input>
+
+
+            <wsdl:output name="getURLDailyAggregationForReportGroupResponse">
+
+
+                <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:output>
+
+
+            <wsdl:fault name="AWSFault">
+
+
+                <wsdlsoap:fault encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" name="AWSFault" namespace="https://control.akamai.com/HttpContentDeliveryReportService.xsd" use="encoded"/>
+
+
+            </wsdl:fault>
+
+
+        </wsdl:operation>
+
+
+    </wsdl:binding>
+
+
+    <wsdl:service name="HttpContentDeliveryReportService">
+
+
+        <wsdl:port binding="akasiteDeldt:HttpContentDeliveryReportService" name="HttpContentDeliveryReportService">
+
+
+            <wsdlsoap:address location="https://control.akamai.com/nmrws/services/HttpContentDeliveryReportService"/>
+
+
+        </wsdl:port>
+
+
+    </wsdl:service>
+
+
+</wsdl:definitions>

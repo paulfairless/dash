@@ -1,0 +1,181 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Styles Start */
+
+/* Colours */
+@red: rgb(185, 0, 52);
+@purple: rgb(156, 0, 150);
+@orange: rgb(255, 157, 0);
+@blue: rgb(29, 51, 193);
+@steel-blue: rgb(72, 104, 144);
+@light-blue: rgb(44, 99, 241);
+@green: rgb(0, 149, 22);
+@turquoise: rgb(0, 134, 156);
+@grey: rgb(45, 45, 45);
+
+/* Functions */
+.bg(@color) {
+	background: -webkit-gradient(linear, left center, right center, from(@color), to(lighten(@color, 5%)));
+	border-color: lighten(@color, 20%);
+}
+
+/* Main Content */
+body {
+	background-color: lightgrey;
+	color: grey;
+	font-family: 'Open Sans', "Helvetica Neue", sans-serif;
+}
+
+#main {
+
+}
+.highcharts-container {
+	background: transparent !important;
+}
+/* Modules */
+.module-dash (@width: 250px) {
+	width: @width;
+	border: 1px solid;
+	padding: 16px;
+	margin: 8px;	
+	height: 250px;
+	color: white;
+	float:left;	
+	overflow:hidden;
+	}
+
+.module-dash-single {
+	.module-dash(250px);
+}
+.module-dash-double {
+	.module-dash(516px);
+}
+
+/* Backgrounds */
+.bg-red, .bg-status-down {
+	.bg(@red);
+}
+.bg-green, .bg-status-up {
+	.bg(@green);
+}
+.bg-grey {
+	.bg(@grey);
+}
+.bg-steel-blue {
+	.bg(@steel-blue);
+}
+.bg-blue {
+	.bg(@blue);
+}
+.bg-orange, .bg-status-warn {
+	.bg(@orange);
+}
+.bg-purple {
+	.bg(@purple);
+}
+.bg-turquoise {
+	.bg(@turquoise);
+}
+.bg-light-blue {
+	.bg(@light-blue);
+}
+
+/* Text Sizes */
+h2 {
+	margin-bottom: 20px;
+}
+.t-size-x60 {
+	font-size: 60px;
+}
+.t-size-x48{
+	font-size: 48px;
+}
+.t-size-x40 {
+	font-size: 40px;
+}
+.t-size-x24 {
+	font-size: 24px;
+}
+.t-size-x11 {
+	font-size: 11px;
+}
+.t-size-x18 {
+	font-size: 18px;
+}
+.t-size-x8 {
+	font-size: 8px;
+}
+
+#twitter {
+	img {
+		margin: 0 16px 16px 0px;
+		border: 1px solid white;
+	}
+	.user {
+		text-align: center;
+		vertical-align: top;
+	}
+}
+
+#browsers {
+	h2 {
+		margin-bottom: 10px;
+	}
+}
+
+.item {
+	position: relative;
+	display: none;
+	-webkit-transition: 0.6s ease-in-out left;
+	-moz-transition: 0.6s ease-in-out left;
+	-ms-transition: 0.6s ease-in-out left;
+	-o-transition: 0.6s ease-in-out left;
+	transition: 0.6s ease-in-out left;
+}
+
+.active {
+	display: block;
+}
+
