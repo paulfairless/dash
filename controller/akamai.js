@@ -8,7 +8,7 @@ function AkamaiCtrl($scope, $timeout, $http) {
 	this.update = function() {
 		$http.post('https://control.akamai.com/nmrws/services/HttpContentDeliveryReportService', payload, {
 			headers:{
-				"Authorization":"Basic " + $.base64.encode( 'paul.fairless@bskyb.com' + ":" + 'n3wsR0cks'),
+				"Authorization":"Basic " + $.base64.encode( '' + ":" + ''),
 				"Content-Type": 'application/soap+xml;charset=UTF-8;',
 				"SOAPAction": " "
 				}
