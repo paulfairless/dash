@@ -7,7 +7,7 @@ function IcingaCtrl($scope, $timeout, $http) {
 		var warn = 0;
 		var error = 0;
 		
-		$http.get('http://monitoring.scoop.bskyb.com/icinga/cgi-bin/status.cgi?hostgroup=prod-app-servers&style=detail&nostatusheader&jsonoutput').success(function(data){
+		$http.get('http://icinga/cgi-bin/status.cgi?hostgroup=prod-app-servers&style=detail&nostatusheader&jsonoutput').success(function(data){
 			$.each(data.status.service_status, function(index, item) {
 				numChecks ++;
 				if (item.status == 'OK') ok ++;
